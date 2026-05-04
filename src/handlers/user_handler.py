@@ -348,7 +348,7 @@ async def chart_ready_callback_handler(clb: CallbackQuery, **kwargs):
     await clb.message.edit_media(
         media=InputMediaPhoto(
             media=await ConfigDatabase.get_value("photo3"),
-            caption=f"👉 <b>{pair_name}</b>\n\n<b>Enter your trade amount. Enter the amount according to proper <a href='https://telegra.ph/MONEY-MANAGEMENT-OR-HOW-NOT-TO-LOSE-THE-ENTIRE-DEPOSIT-03-31'>money-management</a></b>",
+            caption=f"👉 <b>{pair_name}</b>\n\n<b>Enter your trade amount. Enter the amount according to proper <a href='https://telegra.ph/How-to-start-making-money-04-24'>money-management</a></b>",
             parse_mode="HTML",
         ),
         
