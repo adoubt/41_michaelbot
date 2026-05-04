@@ -605,7 +605,7 @@ async def fallback_handler(message: Message, **kwargs):
     if is_activated == 0:
         await message.answer(LOCALES["activate_access"], parse_mode="HTML")
     else:
-        await message.answer("Unrecognized text.\n\nUse /signals to get trading signals or <b>contact me</b> directly<b>\n@Traderr_Lisa_not_bot</b>", parse_mode="HTML")
+        await message.answer("Unrecognized text.\n\nUse /signals to get trading signals or <b>contact me</b> directly<b>\n@michael_DMbot</b>", parse_mode="HTML")
 
 
 
