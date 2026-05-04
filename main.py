@@ -1,0 +1,41 @@
+import asyncio
+from loguru import logger
+
+from src.handlers import user_handler
+from src.methods.database.init_db import init_databases
+from src.methods.user_management_service import user_management_loop
+from src.misc import bot, dp
+# from src.methods.payment import payment_checker
+
+
+def register_handlers():
+    dp.include_routers(user_handler.router)
+  
+
+# Платежный поток (можно временно отключить)
+async def payment_polling():
+    # await payment_checker.run_order_status_checker()  # Оставь, если нужно
+    pass
+
+# Инициализация баз данных
+async def on_startup():
+    await init_databases()  # Инициализация всех баз данных
+    logger.info("Базы данных успешно инициализированы")
+
+async def main():
+    await on_startup()  # Вызов инициализации баз данных
+    register_handlers() # Регистрация обработчиков
+    # aaio_polling_task = asyncio.create_task(payment_polling())  # Отключено, если не нужно
+    # Запускаем все задачи параллельно
+    await asyncio.gather(
+        dp.start_polling(bot),  # Telegram-бот
+        user_management_loop(),  # Управление пользователями
+        
+        # cp.start_polling(), # CryptoPay
+        # aaio_polling_task      # Закомментировано для исключения третьего потока
+    )
+
+if __name__ == "__main__":
+    logger.add('src/logs/logs.log', format="{time} {level} {message}", level='DEBUG')   
+
+    asyncio.run(main())
