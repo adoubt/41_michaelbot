@@ -506,7 +506,7 @@ async def unban_user(message: Message, **kwargs):
         return
 
     await UsersDatabase.unban(user_id)
-
+    await UsersDatabase.update_last_activity(user_id)
     if await UsersDatabase.get_value(user_id, 'is_activated') == 1:
         try:
             await bot.send_message(
